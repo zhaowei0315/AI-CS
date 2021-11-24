@@ -77,14 +77,23 @@ def detect(img):
 
 
 if __name__ == "__main__":
-    img_path = r'C:\yolov5\data\images\zidane.jpg'
-    image = cv.imread(img_path)
+#     img_path = r'C:\yolov5\data\images\zidane.jpg'
+#     image = cv.imread(img_path)
+# 
+#     start = time.time()
+#     image, _ = detect(image)
+#     end = time.time()
+#     print(end - start)
+# 
+#     cv.imshow('Result', image)
+#     cv.waitKey(0)
+#     cv.destroyAllWindows()
 
-    start = time.time()
-    image, _ = detect(image)
-    end = time.time()
-    print(end - start)
-
-    cv.imshow('Result', image)
-    cv.waitKey(0)
-    cv.destroyAllWindows()
+    # 监控摄像头 
+    capture = cv.VideoCapture(0)
+    while (1):
+        ret, image = capture.read()
+        image, _ = detect(image)
+        cv.imshow('Mask Detection', image)
+        if cv.waitKey(1) & 0xFF == ord('q'):
+            break
